@@ -66,16 +66,23 @@ Locally,
 Getting credentials to access the cluster,  
  - az aks get-credentials -g super-service-rg -n superserviceaks --admin 
 Use admin for getting the user admin role for current user.
+
 To automate this process in Azure DevOps you can create the Kubernetes service connection using the credentials created.
 
 Deployment manifest files description - 
-You can see the manifests files created under pipelines folder for AKS deployment.
+You can see the manifests files created under aks folder under pipelines folder for AKS deployment.
 - nginx-ingress.yaml - create the ingress-controller - here we are using NGINX ingress controller.
 - manifest.yml - application deployment manifest file, contains the service deployment also (CLusterIP)
 - superserviceingress.yaml - use to connect to the service from outside (hitting the domain superservice.com reaches the configured cluster ip service)
-- HPA - Horzontal pode auto scaling. Scaling technique used for scaling the pods based on CPU and Memory utilization.
+- HPA.yaml - Horzontal pode auto scaling. Scaling technique used for scaling the pods based on CPU and Memory utilization.
+- loadbalancer-service.yaml - this file created to show how to create an internal loadbalancer service.
 
-  
+You can configure a deployment.yml file that contains Kubernetes tasks to apply the manifests file. This you can call from azure-pipelin.yml - you can generate stage template for CICD stages
+For one time configurations like ingress controller configurations you can manually run kubectl apply command or add a prerequisite step in pipeline that apply all required one time configurations template.
+order for applying manifests - 
+  1. create ingress-controller by applying nginx-ingress.yaml
+  2. Deploy and configure application by applying manifest.yaml,hpa.yaml
+  3. apply superserviceingress.yaml file to configure the Ingress with app domain and route traffic to your application service
 Alerts and Monitor 
 You can setup alerts and montor to proactively monitor the AKS cluster node, pods etc.
 Few options,
