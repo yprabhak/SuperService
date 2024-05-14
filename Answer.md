@@ -85,3 +85,10 @@ Few options,
 
 For Alerts - you can create in Grafana Alerts based on cetain conditions we set like CPU percentage, memory utilisation or pod failures etc, Or You can create Alert in azure and create action group to inform group of people about failures and all.
 
+
+# Improvements
+. Use of Azure DevOps Services for SDLC management in all phases.
+. Code quality checks in CI - SonarQube
+. Checkmarx security scan for security vulnerability assessment and identification - CI
+. If you are using IAC like Terrform, Bicep or ARM - use KICS or Checkov IAC scanning tools to identify IAC issues and resolution.
+. Use of Azure Application Gateway and Azure Frontdoor. 
