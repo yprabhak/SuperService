@@ -1,4 +1,4 @@
-# This repository contains dotnet core application and associated templates and documentations to deploy it in azure kubernetes service.
+# This repository contains dotnetcore project superservice, associated templates and documentations to deploy it in azure kubernetes service.
 
 **Folder description:** 
   - pipelines -- contains CI pipeline templates and Kubernetes manifest files inside AKS folder
