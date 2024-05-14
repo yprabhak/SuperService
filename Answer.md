@@ -47,12 +47,12 @@ If you are using Azure CLI or Powershell you have to login to the docker registr
 
 ## AKS Deployment. 
 To create an AKS cluster you can either use azure portal or you can use scripts, you can use Azure CLI commands to create and AKS cluster,
-example : 
+example - azure cli script: 
 - az aks create --resource-group super-service-rg --name superserviceaks \
    --node-count 2 --enable-addons http_application_routing \
    --generate-ssh-keys --service-principal <SERVICE_PRINCIPAL_ID> \
    --client-secret <SERVICE_PRINCIPAL_PASSWORD> \
-   --attach-acr superserviceacr
+   --attach-acr superserviceacr  (basic example script with http app routing)
 
 This is a basic example, we can use terraform script to provision AKS. 
 Important things to remember while provisioning AKS cluster about the type of networking: By default AKS uses kubenet network, If you are creating an AKS cluster for a large scale business application it is better to create your own Vnet and create AKS with Azure CNI networking. Here you can create a vnet with name "internal-assets" and create subnet based on IP requirement. 
