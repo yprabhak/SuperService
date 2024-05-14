@@ -66,7 +66,11 @@ Locally,
 Getting credentials to access the cluster,  
  - az aks get-credentials -g super-service-rg -n superserviceaks --admin 
 Use admin for getting the user admin role for current user.
-To automate this process in Azure DevOps you can create the Kubernetes service connection using the credentials created. 
+To automate this process in Azure DevOps you can create the Kubernetes service connection using the credentials created.
+You can see the manifests files created under pipelines folder for AKS deployment.
+manifest.yml - application deployment manifest file, contains the service deployment also (CLusterIP)
+nginx-ingress.yaml - create the ingress-controller
+HPA - Horzontal pode auto scaling
 
   
 Alerts and Monitor 
