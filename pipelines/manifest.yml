@@ -1,9 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: superservice
+  name: superservice  
+  labels:
+    app: superservice
 spec:
-  replicas: 2
+  replicas: 2 
   selector:
     matchLabels:
       app: superservice
@@ -13,24 +15,43 @@ spec:
         app: superservice
     spec:
       containers:
-      - name: superservice
-        image: super-service-acr/superservice:latest
+      - name: superserviceacr
+        image: superservice:latest
+        port: 80
+        imagePullSecrets:
+        - name: superserviceacr-secret
         resources:
-          requests:
+          requests: 
             cpu: 100m
             memory: 128Mi
           limits:
-            cpu: 250m
-            memory: 256Mi
-        ports:
-        - containerPort: 80
----
+            cpu: 500m
+            memory: 1Gi
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+      securityContext:
+        runAsNonRoot: true
+        readOnlyRootFilesystem: false
+----
 apiVersion: v1
 kind: Service
 metadata:
-  name: superservice
+  name: superservice-service
 spec:
-  ports:
-  - port: 80
   selector:
     app: superservice
+  type: ClusterIP
