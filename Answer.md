@@ -59,9 +59,24 @@ Important things to remember while provisioning AKS cluster about the type of ne
 
 After Provisioning AKS cluster before application deployment you have to make sure all the required access you added to azure resources to communicate in Vnet. For example if you are accessing container images you have to connect with ACR. So as above example you have to create a service principle and you have to give access to that Service Prinicple to the AKS cluster and ACR. When we are attaching AKS cluster to VNet you have to assign network related role permissions.
 
-Deployment: 
-Kubernetes manifest file is added for deploying the application to kubernetes.
+Connect To AKS Cluster for Deployment: 
+You can connect to aks cluster from local machine or you can use the kubernetes task in azure devops for deploying the app.
+Locally, 
+ - az login - login to the correct subscription - if you have multiple subscription set your subscription using az account set command.
+Getting credentials to access the cluster,  
+ - az aks get-credentials -g super-service-rg -n superserviceaks --admin 
+Use admin for getting the user admin role for current user.
+To automate this process in Azure DevOps you can create the Kubernetes service connection using the credentials created. 
 
+  
+Alerts and Monitor 
+You can setup alerts and montor to proactively monitor the AKS cluster node, pods etc.
+Few options,
+- Configure Azure Alerts and Monitor.
+- You can enable Diagnostics settings in azure for sending telemetry data to specific endpoints like Log Analytics Workspace or Eventhub etc.
+- Setup Grafana : Configure a grafana dashboard - you can enable azure managed grafana or you can create your own grafana org and send Telemetry data to Gragana using Open Telemetry collector configuration.
+
+For Alerts - you can create in Grafana Alerts based on cetain conditions we set like CPU percentage, memory utilisation or pod failures etc, Or You can create Alert in azure and create action group to inform group of people about failures and all.
 
 
 
