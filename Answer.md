@@ -1,4 +1,4 @@
-#Super Service CI
+# Super Service CI
 
 This repo contains the template to build, test and create container for dotnet core application.
 azure-pipeline.yml file is a yaml file used for creating the ci pipeline in azure devops
@@ -12,12 +12,11 @@ azure-pipeline.yml file is a yaml file used for creating the ci pipeline in azur
 Above dotnet tasks are internally running the dotnet cli commands. 
 You can use cmd, powershell, or bash also for running the above dotnet commands -> dotnet restore, build and test.
 
-#Super Service CD
+# Super Service CD
 Here I am using Azure Cloud Service Provider,
 So we have to create, 
   Azure Container Registry for store container images.
   Azure Kubernetes Service for Container orchestration.
-a
 You can create ACS and AKS either manually or using scripts (Azure CLI).
 
 you can install azure cli from microsoft - https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
@@ -33,8 +32,9 @@ In Azure DevOps you can create an Azure Resource Manager service connection to a
 
 Scripts,
 
- 1. az group create --name AzureRG --location eastus
- 2. az acr create --resource-group AzureRG --name dotnetaksdemo --sku Standard - SKU standard is required for VNet integration or private endpoint integration.
+ 1. az group create --name uper-service-rg --location eastus --> This will create Resource Group
+ 2. az acr create --resource-group super-service-rg --name superserviceacr --sku Standard
+ Note - SKU standard is required for VNet integration or private endpoint integration.
 
 You can use terraform also to create the azure resources.
   https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_registry
@@ -42,6 +42,25 @@ In azure pipelines after defining the tf file, you can use, terraform tasks to i
 
 After creating the ACR you can use the docker commands or docker tasks to build and push the container image. 
 If you are using docker task make sure to create the docker registry service connection in Azure DevOps and use that in the docker tasks.
-If you are using Azure CLI powershell you have to login to the docker registry and then you have to tag the image with acr-name/repo:tag format use docker tag and you can push the image using docker push command.
+If you are using Azure CLI or Powershell you have to login to the docker registry and then you have to tag the image with acr-name/repo:tag format, you can use docker tag command to tag image, and you can push the image using docker push command.
+
+## AKS Deployment. 
+To create an AKS cluster you can either use azure portal or you can use scripts, you can use Azure CLI commands to create and AKS cluster,
+example : 
+- az aks create --resource-group super-service-rg --name superserviceaks \
+   --node-count 2 --enable-addons http_application_routing \
+   --generate-ssh-keys --service-principal <SERVICE_PRINCIPAL_ID> \
+   --client-secret <SERVICE_PRINCIPAL_PASSWORD> \
+   --attach-acr superserviceacr
+
+This is a basic example, we can use terraform script to provision AKS. 
+Important things to remember while provisioning AKS cluster about the type of networking: By default AKS uses kubenet network, If you are creating an AKS cluster for a large scale business application it is better to create your own Vnet and create AKS with Azure CNI networking. Here you can create a vnet with name "internal-assets" and create subnet based on IP requirement. 
+
+After Provisioning AKS cluster before application deployment you have to make sure all the required access you added to azure resources to communicate in Vnet. For example if you are accessing container images you have to connect with ACR. So as above example you have to create a service principle and you have to give access to that Service Prinicple to the AKS cluster and ACR. When we are attaching AKS cluster to VNet you have to assign network related role permissions.
+
+Deployment: 
+Kubernetes manifest file is added for deploying the application to kubernetes.
+
+
 
 
