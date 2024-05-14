@@ -70,10 +70,10 @@ To automate this process in Azure DevOps you can create the Kubernetes service c
 
 Deployment manifest files description - 
 You can see the manifests files created under pipelines folder for AKS deployment.
-- manifest.yml - application deployment manifest file, contains the service deployment also (CLusterIP)
 - nginx-ingress.yaml - create the ingress-controller - here we are using NGINX ingress controller.
-- superserviceingress.yaml - 
-- HPA - Horzontal pode auto scaling
+- manifest.yml - application deployment manifest file, contains the service deployment also (CLusterIP)
+- superserviceingress.yaml - use to connect to the service from outside (hitting the domain superservice.com reaches the configured cluster ip service)
+- HPA - Horzontal pode auto scaling. Scaling technique used for scaling the pods based on CPU and Memory utilization.
 
   
 Alerts and Monitor 
