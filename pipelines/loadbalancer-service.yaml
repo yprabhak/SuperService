@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: superservice
+spec:
+  selector:
+    app: superservice
+  ports:
+  - port: 80
+    targetPort: 80
+  type: LoadBalancer
+  controller:
+    service:
+      annotations:
+        service.beta.kubernetes.io/azure-load-balancer-internal: "true"
