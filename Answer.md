@@ -3,6 +3,7 @@
 This repo contains the template to build, test and create container for dotnet core application.
 azure-pipeline.yml file is a yaml file used for creating the ci pipeline in azure devops
  steps included in azure-pipeline.yml
+ Note: **pipelines** folder contains the CICD templates,
    1. Install dotnet sdk
    2. Run dotnet restore using dotnet CLI task
    3. Run dotnet build using dotnet CLI task
