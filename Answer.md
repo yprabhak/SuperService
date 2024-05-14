@@ -67,10 +67,13 @@ Getting credentials to access the cluster,
  - az aks get-credentials -g super-service-rg -n superserviceaks --admin 
 Use admin for getting the user admin role for current user.
 To automate this process in Azure DevOps you can create the Kubernetes service connection using the credentials created.
+
+Deployment manifest files description - 
 You can see the manifests files created under pipelines folder for AKS deployment.
-manifest.yml - application deployment manifest file, contains the service deployment also (CLusterIP)
-nginx-ingress.yaml - create the ingress-controller
-HPA - Horzontal pode auto scaling
+- manifest.yml - application deployment manifest file, contains the service deployment also (CLusterIP)
+- nginx-ingress.yaml - create the ingress-controller - here we are using NGINX ingress controller.
+- superserviceingress.yaml - 
+- HPA - Horzontal pode auto scaling
 
   
 Alerts and Monitor 
@@ -81,6 +84,4 @@ Few options,
 - Setup Grafana : Configure a grafana dashboard - you can enable azure managed grafana or you can create your own grafana org and send Telemetry data to Gragana using Open Telemetry collector configuration.
 
 For Alerts - you can create in Grafana Alerts based on cetain conditions we set like CPU percentage, memory utilisation or pod failures etc, Or You can create Alert in azure and create action group to inform group of people about failures and all.
-
-
 
