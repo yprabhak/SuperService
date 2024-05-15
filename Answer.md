@@ -94,7 +94,7 @@ Few options,
 
 
 # Improvements
-- Optise dockerfile : create non root user
+- Optimise dockerfile : create non root user
 - Use of Azure DevOps Services for SDLC management in all phases.
 - Code quality checks in CI : SonarQube Integration
 - Checkmarx security scan for security vulnerability assessment and identification in CI pipeline.
