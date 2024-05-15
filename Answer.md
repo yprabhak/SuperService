@@ -94,9 +94,9 @@ For Alerts - you can create in Grafana Alerts based on cetain conditions we set 
 
 
 # Improvements
-- Optise dockerfile - create non root user
+- Optise dockerfile : create non root user
 - Use of Azure DevOps Services for SDLC management in all phases.
-- Code quality checks in CI - SonarQube
-- Checkmarx security scan for security vulnerability assessment and identification - CI
-- Usage of IAC Scanning Tools - For scanning IAC like Terrform, Bicep or ARM  suggested tools Checkmarx KICS or Checkov.
-- Use of Azure Application Gateway and Azure Frontdoor. 
+- Code quality checks in CI : SonarQube Integration
+- Checkmarx security scan for security vulnerability assessment and identification in CI pipeline.
+- Usage of IAC Scanning Tools : For scanning IAC (Terrform, Bicep or ARM, etc.) Suggested tools Checkmarx KICS, Checkov.
+- Use of Azure Application Gateway and Azure Frontdoor.
