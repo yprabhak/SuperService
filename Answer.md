@@ -83,14 +83,14 @@ order for applying manifests -
   1. create ingress-controller by applying nginx-ingress.yaml
   2. Deploy and configure application by applying manifest.yaml,hpa.yaml
   3. apply superserviceingress.yaml file to configure the Ingress with app domain and route traffic to your application service
-Alerts and Monitor 
+**Alerts and Monitor** 
 You can setup alerts and montor to proactively monitor the AKS cluster node, pods etc.
 Few options,
 - Configure Azure Alerts and Monitor.
 - You can enable Diagnostics settings in azure for sending telemetry data to specific endpoints like Log Analytics Workspace or Eventhub etc.
 - Setup Grafana : Configure a grafana dashboard - you can enable azure managed grafana or you can create your own grafana org and send Telemetry data to Gragana using Open Telemetry collector configuration.
 
-For Alerts - you can create in Grafana Alerts based on cetain conditions we set like CPU percentage, memory utilisation or pod failures etc, Or You can create Alert in azure and create action group to inform group of people about failures and all.
+**For Alerts** - you can create in Grafana Alerts based on cetain conditions we set like CPU percentage, memory utilisation or pod failures etc, Or You can create Alert in azure and create action group to inform group of people about failures and all.
 
 
 # Improvements
